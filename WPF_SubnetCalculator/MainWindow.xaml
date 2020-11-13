@@ -5,8 +5,112 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_SubnetCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="675" Width="487.5">
+
+    <Grid Background="AliceBlue">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- TextBlocks, Read Only, Input Info-->
+        <TextBox x:Name="InputInfo1" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="1" Grid.Column="2">1stOct</TextBox>
+        <TextBox x:Name="InputInfo2" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="1" Grid.Column="3">2ndOct</TextBox>
+        <TextBox x:Name="InputInfo3" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="1" Grid.Column="4">3rdOct</TextBox>
+        <TextBox x:Name="InputInfo4" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="1" Grid.Column="5">4thOct</TextBox>
+        <TextBox x:Name="CIDRinfo" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="1" Grid.Column="7">CIDR</TextBox>
+        <TextBox x:Name="InputInfoSubnet1" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4">Subnet Mask</TextBox>
+        <TextBox x:Name="InputInfoWildcard1" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="10" Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="4">Wildcard Mask</TextBox>
+
+        <!-- TextBlocks, Input-->
+        <TextBox x:Name="Octet1InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="2" Grid.Column="2" MaxLength="3"></TextBox>
+        <TextBox x:Name="Octet2InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="2" Grid.Column="3" MaxLength="3"></TextBox>
+        <TextBox x:Name="Octet3InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="2" Grid.Column="4" MaxLength="3"></TextBox>
+        <TextBox x:Name="Octet4InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="2" Grid.Column="5" MaxLength="3"></TextBox>
+        <TextBox x:Name="CIDRinputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="2" Grid.Column="7" MaxLength="2"></TextBox>
+
+        <TextBox x:Name="Subnet1InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="2" MaxLength="3"></TextBox>
+        <TextBox x:Name="Subnet2InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="3" MaxLength="3"></TextBox>
+        <TextBox x:Name="Subnet3InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="4" MaxLength="3"></TextBox>
+        <TextBox x:Name="Subnet4InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="5" MaxLength="3"></TextBox>
+
+        <TextBox x:Name="Wildcard1InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="7" MaxLength="3"></TextBox>
+        <TextBox x:Name="Wildcard2InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="8" MaxLength="3"></TextBox>
+        <TextBox x:Name="Wildcard3InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="9" MaxLength="3"></TextBox>
+        <TextBox x:Name="Wildcard4InputTxt" IsReadOnly="False" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="4" Grid.Column="10" MaxLength="3"></TextBox>
+
+        <!-- Buttons -->
+        <Button x:Name="BtnCalculate" Grid.Row="2" Grid.Column="9" FontSize="16" Grid.ColumnSpan="2" Click="BtnCalculate_Click" Height="27">Calculate</Button>
+        <Button x:Name="BtnRandom" Grid.Row="1" Grid.Column="9" FontSize="16" Grid.ColumnSpan="2" Click="BtnRandom_Click" Height="27">Random</Button>
+        <Button x:Name="BtnClearInput" Grid.Row="0" Grid.Column="2" FontSize="12" Grid.ColumnSpan="2" Click="BtnClearInput_Click" Height="27" Margin="0,4,10,4">Clear Input</Button>
+
+        <!-- TextBlocks, Read Only, Info -->
+        <TextBox x:Name="InfoClassTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5">Class</TextBox>
+        <TextBox x:Name="InfoNetworkAddressTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5">Network Address</TextBox>
+        <TextBox x:Name="InfoFirstUsableHostTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="5">First Usable Host</TextBox>
+        <TextBox x:Name="InfoLastUsableHostTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="5">Last Usable Host</TextBox>
+        <TextBox x:Name="InfoBroadcastAddressTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="5">Broadcast Address</TextBox>
+        <TextBox x:Name="InfoTotalHostsTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="5">Total Hosts</TextBox>
+        <TextBox x:Name="InfoUsableHostsTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="5">Usable Hosts</TextBox>
+        <TextBox x:Name="InfoSubnetMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="5">Subnet Mask</TextBox>
+        <TextBox x:Name="InfoWildcardMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="5">Wildcard Mask</TextBox>
+        <TextBox x:Name="InfoBinarySubnetMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="5">Binary Subnet Mask</TextBox>
+        <TextBox x:Name="InfoCidrTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="15" Grid.Column="7" Grid.ColumnSpan="2">CIDR</TextBox>
+
+        <!-- TextBlocks, Read Only, Output -->
+        <TextBox x:Name="OutputClassTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="6" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputNetworkAddressTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputFirstUsableHostTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="8" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputLastUsableHostTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputBroadcastAddressTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="10" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputTotalHostsTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="11" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputUsableHostsTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="12" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputSubnetMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="13" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputWildcardMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="14" Grid.Column="7" Grid.ColumnSpan="5"></TextBox>
+        <TextBox x:Name="OutputBinarySubnetMaskTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="16" Grid.Column="1" Grid.ColumnSpan="11"></TextBox>
+        <TextBox x:Name="OutputCidrTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="15" Grid.Column="10" Grid.ColumnSpan="2"></TextBox>
+
+        <!-- TextBlocks, Read Only, Output -->
+        <TextBox x:Name="MessageTxt" IsReadOnly="True" TextAlignment="Center" VerticalAlignment="Center" FontSize="19" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="7"></TextBox>
+
+        <!-- Checkboxes -->
+        <CheckBox x:Name="Checkbox1CIDR" Checked="Checkbox1CIDR_Checked" Content="" Grid.Column="6" HorizontalAlignment="Left" Margin="17,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Checkbox2Netmask" Checked="Checkbox2Netmask_Checked" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="17,10,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Checkbox3Wildcard" Checked="Checkbox3Wildcard_Checked" Content="" Grid.Column="6" HorizontalAlignment="Left" Margin="17,10,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+
     </Grid>
+
 </Window>
