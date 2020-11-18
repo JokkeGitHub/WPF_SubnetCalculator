@@ -118,71 +118,41 @@ namespace WPF_SubnetCalculator
             inputWildcard3 = Wildcard3InputTxt.Text;
             inputWildcard4 = Wildcard4InputTxt.Text;
 
-            CheckInputOctet1();
+            CheckIPOctets();
         }
 
         #region Check if input-to-integer conversion is possible
 
         #region Check IP Octets
-        public int CheckInputOctet1()
+        public void CheckIPOctets()
         {
-            if (!Int32.TryParse(inputOctet1, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _octet1 = int.Parse(inputOctet1);
-                CheckInputOctet2();
-            }
-            return success;
-        }
+            success = 0;
 
-        public int CheckInputOctet2()
-        {
-            if (!Int32.TryParse(inputOctet2, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _octet2 = int.Parse(inputOctet2);
-                CheckInputOctet3();
-            }
-            return success;
-        }
+            _octet1 = CheckInput(inputOctet1);
+            _octet2 = CheckInput(inputOctet2);
+            _octet3 = CheckInput(inputOctet3);
+            _octet4 = CheckInput(inputOctet4);
 
-        public int CheckInputOctet3()
-        {
-            if (!Int32.TryParse(inputOctet3, out success))
+            if (success != -1)
             {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _octet3 = int.Parse(inputOctet3);
-                CheckInputOctet4();
-            }
-            return success;
-        }
-
-        public int CheckInputOctet4()
-        {
-            if (!Int32.TryParse(inputOctet4, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _octet4 = int.Parse(inputOctet4);
-
                 CheckValuesIpOctets();
             }
-            return success;
+        }
+
+        public int CheckInput(string tempUserInput)
+        {
+            int output = 0;
+            try
+            {
+                output = Int32.Parse(tempUserInput);
+            }
+            catch (FormatException)
+            {
+                WrongData();
+                success = -1;
+            }
+
+            return output;
         }
 
         public void CheckValuesIpOctets()
@@ -214,15 +184,42 @@ namespace WPF_SubnetCalculator
         {
             if (Checkbox1CIDR.IsChecked == true)
             {
-                CheckInputCIDR();
+                success = 0;
+
+                _cidr = CheckInput(inputCIDR);
+
+                if (success != -1)
+                {
+                    CheckValuesCIDR();
+                }
             }
             else if (Checkbox2Netmask.IsChecked == true)
             {
-                CheckInputSubnet1();
+                success = 0;
+
+                _subnet1 = CheckInput(inputSubnet1);
+                _subnet2 = CheckInput(inputSubnet2);
+                _subnet3 = CheckInput(inputSubnet3);
+                _subnet4 = CheckInput(inputSubnet4);
+
+                if (success != -1)
+                {
+                    CheckValuesSubnetMask();
+                }
             }
             else if (Checkbox3Wildcard.IsChecked == true)
             {
-                CheckInputWildcard1();
+                success = 0;
+
+                _wildcard1 = CheckInput(inputWildcard1);
+                _wildcard2 = CheckInput(inputWildcard2);
+                _wildcard3 = CheckInput(inputWildcard3);
+                _wildcard4 = CheckInput(inputWildcard4);
+
+                if (success != -1)
+                {
+                    GetSubnetMaskFromWildcardMask();
+                }
             }
             else
             {
@@ -231,21 +228,6 @@ namespace WPF_SubnetCalculator
         }
 
         #region Check CIDR
-        public int CheckInputCIDR()
-        {
-            if (!Int32.TryParse(inputCIDR, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _cidr = int.Parse(inputCIDR);
-                CheckValuesCIDR();
-            }
-            return success;
-        }
-
         public void CheckValuesCIDR()
         {
             if (_cidr > 31)
@@ -261,70 +243,9 @@ namespace WPF_SubnetCalculator
                 GetSubnetMaskFromCIDR();
             }
         }
-
         #endregion
 
         #region Check Subnet Mask
-        public int CheckInputSubnet1()
-        {
-            if (!Int32.TryParse(inputSubnet1, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _subnet1 = int.Parse(inputSubnet1);
-                CheckInputSubnet2();
-            }
-            return success;
-        }
-
-        public int CheckInputSubnet2()
-        {
-            if (!Int32.TryParse(inputSubnet2, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _subnet2 = int.Parse(inputSubnet2);
-                CheckInputSubnet3();
-            }
-            return success;
-        }
-
-        public int CheckInputSubnet3()
-        {
-            if (!Int32.TryParse(inputSubnet3, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _subnet3 = int.Parse(inputSubnet3);
-                CheckInputSubnet4();
-            }
-            return success;
-        }
-
-        public int CheckInputSubnet4()
-        {
-            if (!Int32.TryParse(inputSubnet4, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _subnet4 = int.Parse(inputSubnet4);
-                CheckValuesSubnetMask();
-            }
-            return success;
-        }
-
         public void CheckValuesSubnetMask()
         {
             if (_subnet1 > 255 || _subnet1 < 0)
@@ -351,63 +272,6 @@ namespace WPF_SubnetCalculator
         #endregion
 
         #region Check Wildcard Mask
-        public int CheckInputWildcard1()
-        {
-            if (!Int32.TryParse(inputWildcard1, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _wildcard1 = int.Parse(inputWildcard1);
-                CheckInputWildcard2();
-            }
-            return success;
-        }
-        public int CheckInputWildcard2()
-        {
-            if (!Int32.TryParse(inputWildcard2, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _wildcard2 = int.Parse(inputWildcard2);
-                CheckInputWildcard3();
-            }
-            return success;
-        }
-        public int CheckInputWildcard3()
-        {
-            if (!Int32.TryParse(inputWildcard3, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _wildcard3 = int.Parse(inputWildcard3);
-                CheckInputWildcard4();
-            }
-            return success;
-        }
-        public int CheckInputWildcard4()
-        {
-            if (!Int32.TryParse(inputWildcard4, out success))
-            {
-                success = -1;
-                WrongData();
-            }
-            else
-            {
-                _wildcard4 = int.Parse(inputWildcard4);
-                GetSubnetMaskFromWildcardMask();
-            }
-            return success;
-        }
-
         public void GetSubnetMaskFromWildcardMask()
         {
             _subnet1 = 255 - _wildcard1;
@@ -426,65 +290,47 @@ namespace WPF_SubnetCalculator
             if (_octet1 <= 127)
             {
                 networkClass = "A";
+
+                if (_cidr < 8 || _cidr > 15)
+                {
+                    networkClass += " Classless";
+                }
+
                 OutputClassTxt.Text = networkClass;
             }
             else if (_octet1 <= 191)
             {
                 networkClass = "B";
+
+                if (_cidr < 16 || _cidr > 23)
+                {
+                    networkClass += " Classless";
+                }
+
                 OutputClassTxt.Text = networkClass;
             }
             else if (_octet1 <= 223)
             {
                 networkClass = "C";
+
+                if (_cidr < 24)
+                {
+                    networkClass += " Classless";
+                }
+
                 OutputClassTxt.Text = networkClass;
             }
             else if (_octet1 <= 239)
             {
-                networkClass = "D";
+                networkClass = "D (Multicast)";
+
                 OutputClassTxt.Text = networkClass;
             }
             else if (_octet1 <= 255)
             {
-                networkClass = "E";
+                networkClass = "E (Reserved)";
+
                 OutputClassTxt.Text = networkClass;
-            }
-
-            CheckIfClassless();
-        }
-
-        public void CheckIfClassless()
-        {
-            if (networkClass == "A" && _cidr < 8)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "A" && _cidr > 23)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "A" && _cidr > 15)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "B" && _cidr > 23)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "B" && _cidr < 16)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "C" && _cidr < 24)
-            {
-                OutputClassTxt.Text = networkClass + " (Classless)";
-            }
-            else if (networkClass == "D")
-            {
-                OutputClassTxt.Text = networkClass + " (Multicast)";
-            }
-            else if (networkClass == "E")
-            {
-                OutputClassTxt.Text = networkClass + " (Reserved)";
             }
         }
 
@@ -972,7 +818,7 @@ namespace WPF_SubnetCalculator
             string byte2 = Convert.ToString(_subnet2, 2);
             string byte3 = Convert.ToString(_subnet3, 2);
             string byte4 = Convert.ToString(_subnet4, 2);
-            OutputBinarySubnetMaskTxt.Text = byte1 + "." + byte2 + "." + byte3 + "." + byte4;
+            OutputBinarySubnetMaskTxt.Text = $"{ byte1 }.{ byte2 }.{ byte3 }.{ byte4 }";
 
             if (networkClass == "D" || networkClass == "E")
             {
@@ -996,7 +842,14 @@ namespace WPF_SubnetCalculator
             inputCIDR = random.Next(0, 32).ToString();
 
             Checkbox1CIDR.IsChecked = true;
-            CheckInputOctet1();
+            //CheckInputOctet1();
+
+            _octet1 = CheckInput(inputOctet1);
+            _octet2 = CheckInput(inputOctet2);
+            _octet3 = CheckInput(inputOctet3);
+            _octet4 = CheckInput(inputOctet4);
+
+            CheckValuesIpOctets();
         }
 
         private void ClearCalculation()
