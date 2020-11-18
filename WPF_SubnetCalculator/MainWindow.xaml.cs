@@ -135,10 +135,20 @@ namespace WPF_SubnetCalculator
 
             if (success != -1)
             {
-                CheckValuesIpOctets();
+                CheckValue(_octet1);
+                CheckValue(_octet2);
+                CheckValue(_octet3);
+                CheckValue(_octet4);
+            }
+
+            if (success != -1)
+            {
+                CheckboxCidrSubnetOrWildcard();
             }
         }
+        #endregion
 
+        #region Validate input and value
         public int CheckInput(string tempUserInput)
         {
             int output = 0;
@@ -155,28 +165,21 @@ namespace WPF_SubnetCalculator
             return output;
         }
 
-        public void CheckValuesIpOctets()
+        public int CheckValue(int tempInput)
         {
-            if (_octet1 > 255 || _octet1 < 0)
+            int output = 0;
+
+            if (tempInput > 255 || tempInput < 0)
             {
                 WrongData();
-            }
-            else if (_octet2 > 255 || _octet2 < 0)
-            {
-                WrongData();
-            }
-            else if (_octet3 > 255 || _octet3 < 0)
-            {
-                WrongData();
-            }
-            else if (_octet4 > 255 || _octet4 < 0)
-            {
-                WrongData();
+                success = -1;
             }
             else
             {
-                CheckboxCidrSubnetOrWildcard();
+                output = tempInput;
             }
+
+            return output;
         }
         #endregion
 
@@ -204,7 +207,15 @@ namespace WPF_SubnetCalculator
 
                 if (success != -1)
                 {
-                    CheckValuesSubnetMask();
+                    CheckValue(_subnet1);
+                    CheckValue(_subnet2);
+                    CheckValue(_subnet3);
+                    CheckValue(_subnet4);
+                }
+
+                if (success != -1)
+                {
+                    GetCIDRfromSubnetMask();
                 }
             }
             else if (Checkbox3Wildcard.IsChecked == true)
@@ -241,32 +252,6 @@ namespace WPF_SubnetCalculator
             else
             {
                 GetSubnetMaskFromCIDR();
-            }
-        }
-        #endregion
-
-        #region Check Subnet Mask
-        public void CheckValuesSubnetMask()
-        {
-            if (_subnet1 > 255 || _subnet1 < 0)
-            {
-                WrongData();
-            }
-            if (_subnet2 > 255 || _subnet2 < 0)
-            {
-                WrongData();
-            }
-            else if (_subnet3 > 255 || _subnet3 < 0)
-            {
-                WrongData();
-            }
-            else if (_subnet4 > 255 || _subnet4 < 0)
-            {
-                WrongData();
-            }
-            else
-            {
-                GetCIDRfromSubnetMask();
             }
         }
         #endregion
@@ -763,17 +748,17 @@ namespace WPF_SubnetCalculator
             }
             else if (_cidr <= 15)
             {
-                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ lowerOutput }.{ zero }.{ zero }";
-                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ lowerOutput }.{ zero }.{ firstUsable }";
-                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ higherOutput }.{ twoFiftyFive }.{ lastUsable }";
-                OutputBroadcastAddressTxt.Text = $"{inputOctet1 }.{ higherOutput }.{ twoFiftyFive }.{ twoFiftyFive }";
+                OutputNetworkAddressTxt.Text = $"{ _octet1 }.{ lowerOutput }.{ zero }.{ zero }";
+                OutputFirstUsableHostTxt.Text = $"{ _octet1 }.{ lowerOutput }.{ zero }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ _octet1 }.{ higherOutput }.{ twoFiftyFive }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ _octet1 }.{ higherOutput }.{ twoFiftyFive }.{ twoFiftyFive }";
             }
             else if (_cidr <= 23)
             {
-                OutputNetworkAddressTxt.Text = $"{inputOctet1 }.{ inputOctet2 }.{ lowerOutput }.{ zero }";
-                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ lowerOutput }.{ firstUsable }";
-                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ higherOutput }.{ lastUsable }";
-                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ higherOutput }.{ twoFiftyFive }";
+                OutputNetworkAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ lowerOutput }.{ zero }";
+                OutputFirstUsableHostTxt.Text = $"{ _octet1 }.{ _octet2 }.{ lowerOutput }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ _octet1 }.{ _octet2 }.{ higherOutput }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ higherOutput }.{ twoFiftyFive }";
             }
             else if (_cidr <= 30)
             {
@@ -782,17 +767,17 @@ namespace WPF_SubnetCalculator
                 int lastUsableTemp = higherIP - 1;
                 lastUsable = lastUsableTemp.ToString();
 
-                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lowerOutput }";
-                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ firstUsable }";
-                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lastUsable }";
-                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ higherOutput }";
+                OutputNetworkAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ lowerOutput }";
+                OutputFirstUsableHostTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ higherOutput }";
             }
             else
             {
-                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lowerOutput }";
+                OutputNetworkAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ lowerOutput }";
                 OutputFirstUsableHostTxt.Text = "No hosts available";
                 OutputLastUsableHostTxt.Text = "No hosts available";
-                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ higherOutput }";
+                OutputBroadcastAddressTxt.Text = $"{ _octet1 }.{ _octet2 }.{ _octet3 }.{ higherOutput }";
             }
 
             if (networkClass == "D")
@@ -835,21 +820,14 @@ namespace WPF_SubnetCalculator
 
         private void RandomIpGenerator()
         {
-            inputOctet1 = random.Next(0, 256).ToString();
-            inputOctet2 = random.Next(0, 256).ToString();
-            inputOctet3 = random.Next(0, 256).ToString();
-            inputOctet4 = random.Next(0, 256).ToString();
-            inputCIDR = random.Next(0, 32).ToString();
+            _octet1 = random.Next(0, 256);
+            _octet2 = random.Next(0, 256);
+            _octet3 = random.Next(0, 256);
+            _octet4 = random.Next(0, 256);
+            _cidr = random.Next(0, 32);
 
             Checkbox1CIDR.IsChecked = true;
-            //CheckInputOctet1();
-
-            _octet1 = CheckInput(inputOctet1);
-            _octet2 = CheckInput(inputOctet2);
-            _octet3 = CheckInput(inputOctet3);
-            _octet4 = CheckInput(inputOctet4);
-
-            CheckValuesIpOctets();
+            GetSubnetMaskFromCIDR();
         }
 
         private void ClearCalculation()
