@@ -660,7 +660,7 @@ namespace WPF_SubnetCalculator
             }
             else
             {
-                OutputSubnetMaskTxt.Text = _subnet1.ToString() + "." + _subnet2.ToString() + "." + _subnet3.ToString() + "." + _subnet4.ToString();
+                OutputSubnetMaskTxt.Text = $"{ _subnet1 }.{ _subnet2 }.{ _subnet3 }.{ _subnet4 }";
                 OutputCidrTxt.Text = "/" + _cidr.ToString();
             }
         }
@@ -678,7 +678,7 @@ namespace WPF_SubnetCalculator
             }
             else
             {
-                OutputWildcardMaskTxt.Text = wildcardOctet1 + "." + wildcardOctet2 + "." + wildcardOctet3 + "." + wildcardOctet4;
+                OutputWildcardMaskTxt.Text = $"{ wildcardOctet1 }.{ wildcardOctet2 }.{ wildcardOctet3 }.{ wildcardOctet4 }";
             }
             Hosts();
         }
@@ -756,24 +756,24 @@ namespace WPF_SubnetCalculator
             string higherOutput = higherIP.ToString();
             if (_cidr <= 7)
             {
-                OutputNetworkAddressTxt.Text = lowerOutput + "." + zero + "." + zero + "." + zero;
-                OutputFirstUsableHostTxt.Text = lowerOutput + "." + zero + "." + zero + "." + firstUsable;
-                OutputLastUsableHostTxt.Text = higherOutput + "." + twoFiftyFive + "." + twoFiftyFive + "." + lastUsable;
-                OutputBroadcastAddressTxt.Text = higherOutput + "." + twoFiftyFive + "." + twoFiftyFive + "." + twoFiftyFive;
+                OutputNetworkAddressTxt.Text = $"{ lowerOutput }.{ zero }.{ zero }.{ zero }";
+                OutputFirstUsableHostTxt.Text = $"{ lowerOutput }.{ zero }.{ zero }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ higherOutput }.{ twoFiftyFive }.{ twoFiftyFive }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ higherOutput }.{ twoFiftyFive }.{ twoFiftyFive }.{ twoFiftyFive }";
             }
             else if (_cidr <= 15)
             {
-                OutputNetworkAddressTxt.Text = inputOctet1 + "." + lowerOutput + "." + zero + "." + zero;
-                OutputFirstUsableHostTxt.Text = inputOctet1 + "." + lowerOutput + "." + zero + "." + firstUsable;
-                OutputLastUsableHostTxt.Text = inputOctet1 + "." + higherOutput + "." + twoFiftyFive + "." + lastUsable;
-                OutputBroadcastAddressTxt.Text = inputOctet1 + "." + higherOutput + "." + twoFiftyFive + "." + twoFiftyFive;
+                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ lowerOutput }.{ zero }.{ zero }";
+                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ lowerOutput }.{ zero }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ higherOutput }.{ twoFiftyFive }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{inputOctet1 }.{ higherOutput }.{ twoFiftyFive }.{ twoFiftyFive }";
             }
             else if (_cidr <= 23)
             {
-                OutputNetworkAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + lowerOutput + "." + zero;
-                OutputFirstUsableHostTxt.Text = inputOctet1 + "." + inputOctet2 + "." + lowerOutput + "." + firstUsable;
-                OutputLastUsableHostTxt.Text = inputOctet1 + "." + inputOctet2 + "." + higherOutput + "." + lastUsable;
-                OutputBroadcastAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + higherOutput + "." + twoFiftyFive;
+                OutputNetworkAddressTxt.Text = $"{inputOctet1 }.{ inputOctet2 }.{ lowerOutput }.{ zero }";
+                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ lowerOutput }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ higherOutput }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ higherOutput }.{ twoFiftyFive }";
             }
             else if (_cidr <= 30)
             {
@@ -782,17 +782,17 @@ namespace WPF_SubnetCalculator
                 int lastUsableTemp = higherIP - 1;
                 lastUsable = lastUsableTemp.ToString();
 
-                OutputNetworkAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + lowerOutput;
-                OutputFirstUsableHostTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + firstUsable;
-                OutputLastUsableHostTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + lastUsable;
-                OutputBroadcastAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + higherOutput;
+                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lowerOutput }";
+                OutputFirstUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ firstUsable }";
+                OutputLastUsableHostTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lastUsable }";
+                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ higherOutput }";
             }
             else
             {
-                OutputNetworkAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + lowerOutput;
+                OutputNetworkAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ lowerOutput }";
                 OutputFirstUsableHostTxt.Text = "No hosts available";
                 OutputLastUsableHostTxt.Text = "No hosts available";
-                OutputBroadcastAddressTxt.Text = inputOctet1 + "." + inputOctet2 + "." + inputOctet3 + "." + higherOutput;
+                OutputBroadcastAddressTxt.Text = $"{ inputOctet1 }.{ inputOctet2 }.{ inputOctet3 }.{ higherOutput }";
             }
 
             if (networkClass == "D")
